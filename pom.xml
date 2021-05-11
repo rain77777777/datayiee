@@ -6,7 +6,117 @@
 
     <groupId>cn.doitedu</groupId>
     <artifactId>datayiee</artifactId>
+    <packaging>pom</packaging>
     <version>1.0</version>
+    <modules>
+        <module>dataware</module>
+        <module>userprofile</module>
+    </modules>
+
+    <!-- 属性定义，可以理解为定了一些变量 -->
+    <properties>
+        <spark.version>3.0.2</spark.version>
+        <scala.version>2.12.13</scala.version>
+        <hadoop.version>3.2.1</hadoop.version>
+    </properties>
 
 
+    <dependencies>
+        <!--父工程中引入的依赖，会自动被各个子工程继承-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.10</version>
+        </dependency>
+
+        <!--scala依赖-->
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+
+        <!--spark依赖-->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.12</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+
+        <!--spark访问hive的信息-->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-hive_2.12</artifactId>
+            <version>${spark.version}</version>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>nexus-aliyun</id>
+            <name>Nexus aliyun</name>
+            <layout>default</layout>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>ali-plugin</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <snapshots>
+                <enabled>false</enabled>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
+
+
+    <build>
+    <plugins>
+        <!-- 指定编译java的插件 -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+            <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+            </configuration>
+        </plugin>
+
+        <!-- 指定编译scala的插件 -->
+        <plugin>
+            <groupId>net.alchim31.maven</groupId>
+            <artifactId>scala-maven-plugin</artifactId>
+            <version>4.5.1</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>compile</goal>
+                        <goal>testCompile</goal>
+                    </goals>
+                    <configuration>
+                        <args>
+                            <arg>-dependencyfile</arg>
+                            <arg>${project.build.directory}/.scala_dependencies</arg>
+                        </args>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+    </build>
 </project>

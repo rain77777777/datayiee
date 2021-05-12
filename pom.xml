@@ -13,11 +13,12 @@
         <module>userprofile</module>
     </modules>
 
-    <!-- 属性定义，可以理解为定了一些变量 -->
+    <!-- 属性定义 -->
     <properties>
         <spark.version>3.0.2</spark.version>
         <scala.version>2.12.13</scala.version>
         <hadoop.version>3.2.1</hadoop.version>
+        <mysql.version>8.0.24</mysql.version>
     </properties>
 
 
@@ -29,11 +30,38 @@
             <version>3.10</version>
         </dependency>
 
+        <!--Hadoop依赖-->
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client</artifactId>
+            <version>${hadoop.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+            <version>${hadoop.version}</version>
+        </dependency>
+
+        <!--HDFS依赖-->
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-hdfs</artifactId>
+            <version>${hadoop.version}</version>
+        </dependency>
+
         <!--scala依赖-->
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-library</artifactId>
             <version>${scala.version}</version>
+        </dependency>
+
+        <!--数据库连接-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
         </dependency>
 
         <!--spark依赖-->

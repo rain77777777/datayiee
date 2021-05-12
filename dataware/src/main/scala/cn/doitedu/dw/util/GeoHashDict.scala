@@ -25,7 +25,7 @@ object GeoHashDict {
     val props = new Properties()
     props.load(GeoHashDict.getClass.getClassLoader.getResourceAsStream("db.properties"))
 
-    val df = spark.read.jdbc("jdbc:mysql://localhost:3306/realtimedw?useUnicode=true&charcterEncoding=utf8", "t_md_areas", props)
+    val df = spark.read.jdbc("jdbc:mysql://localhost:3306/realtimedw?useUnicode=true&characterEncoding=utf8", "t_md_areas", props)
 
     //扁平化处理
     df.createTempView("df")
@@ -51,7 +51,7 @@ object GeoHashDict {
       GeoHash.geoHashStringWithCharacterPrecision(lat, lng, 5)
     })
 
-    val result = df2.select('province, 'city, 'region, gps2geo('lat, 'lng) as "geohassh")
+    val result = df2.select('province, 'city, 'region, gps2geo('lat, 'lng) as "geohash")
 
     result.write.parquet("dataware/data/geodict")
 

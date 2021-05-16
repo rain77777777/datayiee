@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+<!--连接数据的用户名-->
+  <property>
+      <name>javax.jdo.option.ConnectionUserName</name>
+      <value>root</value>
+  </property>
+<!--连接数据的密码-->
+  <property>
+      <name>javax.jdo.option.ConnectionPassword</name>
+      <value>root</value>
+  </property>
+<!--mysql数据库的访问路径，没有路径则自动创建-->
+  <property>
+      <name>javax.jdo.option.ConnectionURL</name>
+      <value>jdbc:mysql://master:3306/hive?createDatabaseIfNotExist=true&amp;useSSL=false</value>
+  </property>
+<!--连接数据库的驱动-->
+  <property>
+      <name>javax.jdo.option.ConnectionDriverName</name>
+      <value>com.mysql.cj.jdbc.Driver</value>
+  </property>
+<!--元数据是否校验-->
+  <property>
+      <name>hive.metastore.schema.verification</name>
+      <value>false</value>
+  </property>
+<!--是否自动创建核心文件-->
+  <property>
+    <name>datanucleus.schema.autoCreateAll</name>
+    <value>true</value>
+  </property>
+<!--thrift服务器绑定的主机-->
+  <property>
+    <name>hive.server2.thrift.bind.host</name>
+    <value>master</value>
+    </property>
+
+    <property>
+            <name>hive.server2.thrift.port</name>
+            <value>10000</value>
+    </property>
+
+    <property>
+            <name>hive.server2.thrift.bind.host</name>
+            <value>0.0.0.0</value>
+    </property>
+
+    <property>
+            <name>hive.server2.webui.host</name>
+            <value>0.0.0.0</value>
+    </property>
+
+    <property>
+            <name>hive.server2.webui.port</name>
+            <value>10002</value>
+    </property>
+
+    <property>
+            <name>hive.server2.long.polling.timeout</name>
+            <value>5000</value>
+    </property>
+
+    <property>
+            <name>hive.server2.enable.doAs</name>
+            <value>true</value>
+    </property>
+  <!--不存在时，自动创建Hive元数据表-->
+ <property>
+    <name>datanucleus.autoCreateTables</name>
+    <value>true</value>
+ </property>
+<!--元数据服务metastore-->
+  <property>
+    <name>hive.metastore.uris</name>
+    <value>thrift://master:9083</value>
+  </property>
+<!--配置hiveserver2用户名密码 -->
+  <property>
+    <name>hive.server2.thrift.client.user</name>
+    <value>root</value>
+  </property>
+
+  <property>
+    <name>hive.server2.thrift.client.password</name>
+    <value>root</value>
+  </property>
+  <property>
+          <name>hive.server2.support.dynamic.service.discovery</name>
+          <value>false</value>
+  </property>
+<!-- 默认数据仓库存储的位置，该位置为HDFS上的路径 -->
+  <property>
+    <name>hive.metastore.warehouse.dir</name>
+    <value>hdfs://master:9000/user/hive/warehouse</value>
+  </property>
+  <property>
+    <name>hive.exec.scratchdir</name>
+    <value>hdfs://master:9000/user/hive/tmp/hive-${user.name}</value>
+  </property>
+
+<!-- 指定hive查询日志本地存放目录  -->
+  <property>
+    <name>hive.querylog.location</name>
+    <value>/tmp/${user.name}</value>
+  </property>
+<!-- 开启日志功能后存储日志的本地顶层目录  -->
+  <property>
+    <name>hive.server2.logging.operation.log.location</name>
+    <value>/tmp/${user.name}/operation_logs</value>
+  </property>
+
+<!--设置显示表头字段名-->
+ <property>
+   <name>hive.cli.print.header</name>
+   <value>true</value>
+ </property>
+ <property>
+   <name>hive.cli.print.current.db</name>
+   <value>true</value>
+ </property>
+</configuration>

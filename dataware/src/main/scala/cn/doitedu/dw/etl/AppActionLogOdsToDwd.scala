@@ -94,7 +94,7 @@ object AppActionLogOdsToDwd {
 
     // 加载ip地址知识库(读HDFS方式）
     val conf = new Configuration()
-    conf.set("fs.defaultFS", "hdfs://master:8020/")
+    conf.set("fs.defaultFS", "hdfs://master:9000/")
     val fs = FileSystem.get(conf)
     val in = fs.open(new Path("/dicts/ip2region/ip2region.db"))
     val dbFile: FileStatus = fs.listStatus(new Path("/dicts/ip2region/ip2region.db"))(0)
